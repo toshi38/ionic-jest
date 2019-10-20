@@ -8,15 +8,25 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 
+const statusBarSpy = {
+  styleDefault: jest.fn()
+};
+const splashScreenSpy = {
+  hide: jest.fn()
+};
+const platformSpy = {
+  ready: jest.fn().mockReturnValue(Promise.resolve())
+};
+
 describe('AppComponent', () => {
 
-  let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
+  // let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
 
   beforeEach(async(() => {
-    statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
-    splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
-    platformReadySpy = Promise.resolve();
-    platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
+    // statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
+    // splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
+    // platformReadySpy = Promise.resolve();
+    // platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
 
     TestBed.configureTestingModule({
       declarations: [AppComponent],
@@ -39,7 +49,7 @@ describe('AppComponent', () => {
   it('should initialize the app', async () => {
     TestBed.createComponent(AppComponent);
     expect(platformSpy.ready).toHaveBeenCalled();
-    await platformReadySpy;
+    await platformSpy.ready;
     expect(statusBarSpy.styleDefault).toHaveBeenCalled();
     expect(splashScreenSpy.hide).toHaveBeenCalled();
   });
