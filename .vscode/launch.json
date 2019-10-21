@@ -27,7 +27,7 @@
       "name": "Jest Current File",
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "cwd": "${workspaceFolder}",
-      "args": ["${relativeFile}"],
+      "args": ["--runTestsByPath", "${relativeFile}"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "windows": {
